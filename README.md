@@ -1,18 +1,18 @@
-# Pipex
+# pipex
 
 ## Description
 
-Pipex is a project at 42 that involves creating a simple program to mimic the functionality of the shell command `pipe` (`|`). The goal is to execute two commands in two separate processes and redirect the output of the first command as input to the second command.
+pipex is a project at 42 that involves creating a simple program to mimic the functionality of the shell command `pipe` (`|`). The goal is to execute two commands in two separate processes and redirect the output of the first command as input to the second command.
 
 ## Base Features
 
-- Implements basic shell functionality with pipes
-- Handles simple command execution in two processes
-- Supports input/output redirection
+- Implements basic shell functionality with pipes.
+- Handles simple command execution in two processes.
+- Supports input/output redirection.
 
-## Bonuses
+## Bonus Functionality
 
-The bonus part of Pipex enhances the basic functionality with the following features:
+The bonus part of pipex enhances the basic functionality with the following features:
 
 - **Multiple Pipes**: Ability to use multiple pipes in succession (`cmd1 | cmd2 | cmd3 ...`), which enables complex command line data processing.
 - **Here_doc**: Implements `here_doc` functionality to allow for inline data entry that can be used as input to the command chain.
