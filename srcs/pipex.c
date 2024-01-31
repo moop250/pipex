@@ -6,11 +6,17 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 23:52:06 by hlibine           #+#    #+#             */
-/*   Updated: 2024/01/31 10:24:54 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/01/31 15:47:19 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void	px_error(char *in)
+{
+	perror(in);
+	exit(EXIT_FAILURE);
+}
 
 void	excec(const char *cmd, char **envp)
 {
