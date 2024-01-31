@@ -6,11 +6,11 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 23:52:06 by hlibine           #+#    #+#             */
-/*   Updated: 2024/01/30 16:27:47 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/01/31 10:26:28 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipex.h"
+#include "../srcs/pipex.h"
 #include "get_next_line/get_next_line.h"
 
 void	excec(const char *cmd, char **envp)

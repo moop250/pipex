@@ -6,11 +6,11 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 18:20:09 by hlibine           #+#    #+#             */
-/*   Updated: 2024/01/30 16:25:07 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/01/31 10:37:41 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipex.h"
+#include "pipex.h"
 
 void	px_error(char *in)
 {
@@ -21,6 +21,14 @@ void	px_error(char *in)
 char	**cmdwrk(char *cmd)
 {
 	char	**out;
+
+	out = malloc(1 * sizeof(char *));
+	if (!out)
+		px_error("Error: Malloc failure");
+	while (cmd)
+	{
+		
+	}
 }
 
 void	px_free(char **in)

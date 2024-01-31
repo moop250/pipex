@@ -6,7 +6,7 @@
 #    By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/23 16:16:12 by hlibine           #+#    #+#              #
-#    Updated: 2024/01/30 13:30:26 by hlibine          ###   ########.fr        #
+#    Updated: 2024/01/31 11:20:10 by hlibine          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 AR = ar rcs
 RM = rm -f
-LIBFT = Libft/
-BONUS = checker
+LIBFT = srcs/libft/
+BONUS = pipex_bonus
 
 SRCS_PX = srcs/pipex.c \
 
@@ -33,7 +33,7 @@ OBJS = ${SRCS:.c=.o}
 
 BONUS_OBJS = ${BONUS_SRCS:.c=.o}
 
-INCLUDE = -L ./Libft -lft
+INCLUDE = -L ./srcs/libft -lft
 
 GREEN = \033[0;32m
 ORANGE = \033[38;5;208m
@@ -75,7 +75,7 @@ fclean: clean
 		@cd $(LIBFT) && $(MAKE) -s fclean
 		@echo "$(GREEN)Full clean up successful$(RESET)"
 
-re: clean all
+re: fclean all
 
 
 

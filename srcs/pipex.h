@@ -6,14 +6,14 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 23:52:21 by hlibine           #+#    #+#             */
-/*   Updated: 2024/01/30 13:50:32 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/01/31 11:19:11 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # include <fcntl.h>
 # include <unistd.h>
-# include "Libft/libft.h"
+# include "libft/srcs/libft.h"
 # include <errno.h>
 # include <stdio.h>
 
