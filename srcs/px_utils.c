@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 18:20:09 by hlibine           #+#    #+#             */
-/*   Updated: 2024/01/31 16:09:32 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/01 15:33:37 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,57 +20,6 @@ void	px_free(char **in)
 	while (in[++i])
 		free(in[i]);
 	free(in);
-}
-
-char **px_realloc(char **in)
-{
-	char	**out;
-	size_t	arraylen;
-	int		i;
-
-	i = 0;
-	arraylen = 0;
-	while (in[arraylen])
-		++arraylen;
-	out = malloc((arraylen * sizeof(char *) + 1));
-	if (!out)
-		px_error("Error: Malloc failure");
-	while (in[i])
-	{
-		out[i] = in[i];
-		++i;
-	}
-	free(in);
-	return(out);
-}
-
-// do a substring
-char	**cmdwrk(char *cmd)
-{
-	char	**out;
-	int		i;
-	char	tmp;
-	int		flag;
-
-	i = 0;
-	flag = 0;
-	out = malloc(1 * sizeof(char *));
-	if (!out)
-		px_error("Error: Malloc failure");
-	while (cmd[i])
-	{
-		while (cmd[i] && cmd[i] == ' ' && cmd[i - 1] != ' ' && flag == 0)
-			++i;
-		if (cmd[i] == '"' || cmd[i] == 39)
-		{
-			if (flag == 0)
-				tmp = cmd[i];
-			else if (flag == 1 && cmd[i] == tmp)
-				flag = 0;
-		}
-		
-	}
-	return (out);
 }
 
 char	*envpwrk(char *in, char **envp)
