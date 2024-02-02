@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 23:52:06 by hlibine           #+#    #+#             */
-/*   Updated: 2024/01/31 15:47:19 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/02 16:13:32 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	child_ps(int *e_fd, char **argv, char **envp)
 	excec(argv[2], envp);
 }
 
-void	parent_ps(int *e_fd, char **argv, char **envp, pid_t pid)
+void	parent_ps(int *e_fd, char **argv, char **envp)
 {
 	int	fd;
 
@@ -78,5 +78,5 @@ int	main(int argc, char **argv, char **envp)
 		px_error("Error: Failed to open fork");
 	if (!pid)
 		child_ps(fd, argv, envp);
-	parent_ps(fd, argv, envp, pid);
+	parent_ps(fd, argv, envp);
 }
