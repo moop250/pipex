@@ -16,12 +16,13 @@ void	*ft_realloc(void *in, size_t oldsize, size_t newsize)
 {
 	void	*out;
 
-	out = malloc(newsize);
+	out = malloc(newsize + 1);
 	if (!out)
 		return (NULL);
 	if (!in)
 		return (out);
 	out = ft_memcpy(out, in, oldsize);
+	free(in);
 	return (out);
 }
 
@@ -41,6 +42,7 @@ char	**cmdwrk(char *cmd)
 	i[0] = 0;
 	i[1] = 0;
 	i[2] = 0;
+	out = NULL;
 	while (cmd[i[0]])
 	{
 		while (cmd[i[0]] == ' ' && cmd[i[0]])
@@ -56,8 +58,9 @@ char	**cmdwrk(char *cmd)
 				++i[0];
 		i[2] = 0;
 		pos[1] = i[0];
-		out = px_realloc(out, i[1], i[1] + 1);
+		out = ft_realloc(out, i[1] * sizeof(char *), (i[1] + 1) * sizeof(char *));
 		out[i[1]] = ft_substr(cmd, pos[0], pos[1] - pos[0]);
+		printf("im on loop %i\n", i[1]);
 		++i[1];
 	}
 	return (out);
