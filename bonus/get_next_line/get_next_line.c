@@ -38,7 +38,7 @@ int	search(char *buf, int c)
 	{
 		if (buf[c + i] == '\n')
 			return (c + i);
-			i++;
+		i++;
 	}
 	return (0);
 }

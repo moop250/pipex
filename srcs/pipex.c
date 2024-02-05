@@ -84,8 +84,10 @@ int	main(int argc, char **argv, char **envp)
 		if (pid[1] == -1)
 			px_error("Error: Failed to open fork");
 		if (pid[1])
-			parent_ps(fd, argv, envp, pid);
+			parent_ps(fd, argv, envp);
 		else
-			waitpid(pid)
+		{
+			waitpid(pid[0]);
+		}
 	}
 }
