@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:33:55 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/05 15:38:05 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/05 15:50:52 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	**px_cmdwrk(const char *cmd)
 		}
 		i[2] = 0;
 		pos[1] = i[0];
-		out = ft_realloc(out, i[1] * sizeof(char *), (i[1] + 2) * sizeof(char *));
+		out = ft_realloc(out, i[1] * 4, (i[1] + 2) * 4);
 		out[i[1]] = ft_substr(cmd, pos[0], pos[1] - pos[0]);
 		out[i[1] + 1] = NULL;
 		++i[1];

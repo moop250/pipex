@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 23:52:06 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/05 15:29:41 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/05 16:21:13 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,16 +67,25 @@ void	parent_ps(int *e_fd, char **argv, char **envp)
 int	main(int argc, char **argv, char **envp)
 {
 	int		fd[2];
-	pid_t	pid;
+	pid_t	pid[2];
 
 	if (argc != 5)
 		px_error("not enough / too many arguments");
 	if (pipe(fd) == -1)
 		px_error("Error: Failed to open the pipe");
-	pid = fork();
-	if (pid == -1)
+	pid[0] = fork();
+	if (pid[0] == -1)
 		px_error("Error: Failed to open fork");
-	if (!pid)
+	if (!pid[0])
 		child_ps(fd, argv, envp);
-	parent_ps(fd, argv, envp);
+	else
+	{
+		pid[1] = fork();
+		if (pid[1] == -1)
+			px_error("Error: Failed to open fork");
+		if (pid[1])
+			parent_ps(fd, argv, envp, pid);
+		else
+			waitpid(pid)
+	}
 }
