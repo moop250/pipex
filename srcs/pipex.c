@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 23:52:06 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/02 16:13:32 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/05 15:29:41 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	excec(const char *cmd, char **envp)
 	char	**s_cmd;
 	char	*path;
 
-	s_cmd = ft_split(cmd, ' ');
+	s_cmd = px_cmdwrk(cmd);
 	if (!s_cmd)
 		exit(EXIT_FAILURE);
 	path = px_getpath(s_cmd[0], envp);
