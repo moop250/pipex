@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:33:55 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/05 15:29:52 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/05 15:38:05 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ i[2] == flag
 pos[0] == start
 pos[1] == end
 */
-char	**px_cmdwrk(char *cmd)
+char	**px_cmdwrk(const char *cmd)
 {
 	char	**out;
 	int		i[3];
