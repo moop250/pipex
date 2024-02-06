@@ -6,17 +6,11 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 23:52:06 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/05 16:21:13 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/06 12:00:47 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-void	px_error(char *in)
-{
-	perror(in);
-	exit(EXIT_FAILURE);
-}
 
 void	excec(const char *cmd, char **envp)
 {
@@ -50,7 +44,7 @@ void	child_ps(int *e_fd, char **argv, char **envp)
 	excec(argv[2], envp);
 }
 
-void	parent_ps(int *e_fd, char **argv, char **envp)
+void	child2_ps(int *e_fd, char **argv, char **envp)
 {
 	int	fd;
 
@@ -62,6 +56,18 @@ void	parent_ps(int *e_fd, char **argv, char **envp)
 	dup2(e_fd[0], STDIN_FILENO);
 	close(e_fd[0]);
 	excec(argv[3], envp);
+}
+
+void	parent_ps(int *fd, int *pid)
+{
+	int	status;
+
+	status = 0;
+	waitpid(pid[0], &status, 0);
+	waitpid(pid[1], &status, 0);
+	close(fd[0]);
+	close(fd[1]);
+	exit(status);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -78,16 +84,11 @@ int	main(int argc, char **argv, char **envp)
 		px_error("Error: Failed to open fork");
 	if (!pid[0])
 		child_ps(fd, argv, envp);
-	else
-	{
-		pid[1] = fork();
-		if (pid[1] == -1)
-			px_error("Error: Failed to open fork");
-		if (pid[1])
-			parent_ps(fd, argv, envp);
-		else
-		{
-			waitpid(pid[0]);
-		}
-	}
+	pid[1] = fork();
+	if (pid[1] == -1)
+		px_error("Error: Failed to open fork");
+	if (!pid[1])
+		child2_ps(fd, argv, envp);
+	parent_ps(fd, pid);
+	return (0);
 }
