@@ -6,12 +6,13 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:33:55 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/06 11:24:39 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/06 16:30:03 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
+//redo based on rui's code but still using start and end to avoid having to redo everyithing
 int	findend(int i, const char *cmd)
 {
 	int	a;
