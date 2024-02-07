@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:33:55 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/07 14:40:05 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/07 16:12:15 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ i[1] == position in out array
 pos[0] == start
 pos[1] == end
 */
+
 char	**px_cmdwrk(const char *cmd)
 {
 	char	**out;
@@ -90,24 +91,3 @@ char	**px_cmdwrk(const char *cmd)
 	}
 	return (out);
 }
-
-/* int	main(int argc, char **argv)
-{
-	char **out;
-	int	i;
-	int	fd;
-
-	fd = open("log.txt", O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	i = 0;
-	dup2(fd, 1);
-	out = px_cmdwrk(argv[1]);
-	while (out[i])
-	{
-		printf("line : %s\n", out[i]);
-		free(out[i]);
-		i++;
-	}
-	free(out);
-	close(fd);
-	return 0;
-} */
