@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:33:55 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/07 13:52:32 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/07 14:40:05 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,18 @@ int	findend(int i, const char *cmd, int flag)
 	else
 		while (cmd[i] && cmd[i] != flag)
 			++i;
+	return (i);
+}
+
+int	findstart(int i, int *flag, const char *cmd)
+{
+	while (cmd[i] == ' ' && cmd[i])
+		++i;
+	if (cmd[i] == '\'' || cmd[i] == '\"')
+	{
+		*flag = cmd[i];
+		++i;
+	}
 	return (i);
 }
 
@@ -66,13 +78,7 @@ char	**px_cmdwrk(const char *cmd)
 	out = NULL;
 	while (cmd[i[0]])
 	{
-		while (cmd[i[0]] == ' ' && cmd[i[0]])
-			++i[0];
-		if (cmd[i[0]] == '\'' || cmd[i[0]] == '\"')
-		{
-			i[2] = cmd[i[0]];
-			++i[0];
-		}
+		i[0] = findstart(i[0], &i[2], cmd);
 		pos[0] = i[0];
 		i[0] = findend(i[0], cmd, i[2]);
 		pos[1] = i[0];
