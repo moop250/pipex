@@ -6,34 +6,16 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 23:52:06 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/08 13:08:07 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/08 15:26:40 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../srcs/pipex.h"
 #include "get_next_line/get_next_line.h"
 
-void	pipewrk(char *cmd, char **envp)
+void	pipewrk(t_key key)
 {
-	pid_t	pid;
-	int		fd[2];
 
-	if (pipe(fd) == -1)
-		px_error("Error: Failed to open the pipe");
-	pid = fork();
-	if (pid == -1)
-		px_error("fork error");
-	if (pid == 0)
-	{
-		close(fd[0]);
-		dup2(fd[1], STDOUT_FILENO);
-		px_excec(cmd, envp);
-	}
-	else
-	{
-		close(fd[1]);
-		dup2(STDIN_FILENO, fd[0]);
-	}
 }
 
 int	heredoc(char *limiter)
@@ -61,46 +43,54 @@ int	heredoc(char *limiter)
 	return (flag);
 }
 
-int	*px_filewrk(char **av, int ac)
+char ***cmdparser(int cmds, char **argv, char **envp)
 {
-	int	*fdio;
+	char	***out;
+	int		i;
+	int		a;
 
-	fdio = malloc(2 * sizeof(int));
-	if (!fdio)
-		px_error("malloc error");
-	fdio[0] = open(av[1], O_RDONLY, 0644);
-	if (fdio[0] < 0)
-		px_error("Error: Failed to open input file");
-	fdio[1] = open(av[ac - 2], O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	if (fdio[1] < 0)
-		px_error("Error: Failed to open output file");
-	return (fdio);
+	i = 0;
+	a = 2;
+	if (ft_strncmp(argv[1], "heredoc", ft_strlen(argv[1])))
+		a = 3;
+	out = malloc(cmds * sizeof(char**));
+	if (!out)
+		return(NULL);
+	while (i < cmds)
+	{
+		out[i] = px_cmdwrk(argv[a]);
+		++i;
+		++a;
+	}
+	return (out);
+}
+
+t_key	keywrk(int argc, char **argv, char **envp)
+{
+	t_key	key;
+
+	key = malloc(sizeof(t_key));
+	key->ac = argc;
+	key->av = argv;
+	key->env = envp;
+	key->in = argc[1];
+	key->out = argc[argc - 1];
+	if (ft_strncmp(argv[1], "heredoc", ft_strlen(argv[1])))
+		key->cmdcount = argc - 4;
+	else
+		key->cmdcount = argc - 3;
+	key->cmds = cmdparser(key->cmdcount, argv, envp);
+	if (!key->cmds)
+		px_error("pipex_bonus: malloc");
+	return (key);
 }
 
 int	main(int argc, char **argv, char **envp)
 {
-	int	i;
-	int	*fdio;
+	t_key	key;
 
 	if (argc < 5)
-		px_error("Error : Not enough arguments");
-	i = 3;
-	if (ft_strncmp(argv[1], "here_doc", ft_strlen(argv[1])))
-		dup2(heredoc(argv[2]), STDIN_FILENO);
-	else
-	{
-		i = 2;
-		fdio = px_filewrk(argv, argc);
-		dup2(fdio[0], STDIN_FILENO);
-	}
-	while (i < argc - 3)
-		pipewrk(argv[i++], envp);
-	dup2(fdio[1], STDOUT_FILENO);
-	px_excec(argv[argc - 2], envp);
-	if (fdio)
-	{
-		unlink(".swap");
-		free(fdio);
-	}
-	return (0);
+		px_error("pipex: not enough arguments");
+	key = keywrk(argc, argv, envp);
+	pipewrk(key);
 }
