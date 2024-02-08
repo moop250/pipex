@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 23:52:06 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/08 16:00:51 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/08 17:16:38 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	heredoc(char *limiter)
 	return (flag);
 }
 
-void	pipewrk(t_key key)
+void	pipewrk(t_key *key)
 {
 	
 }
@@ -60,36 +60,43 @@ char ***cmdparser(int cmds, char **argv, char **envp)
 	{
 		out[i] = px_cmdwrk(argv[a]);
 		if (!out[i])
-			//make freeing function
+			px_3dfree(out);
 		++i;
 		++a;
 	}
 	return (out);
 }
 
-t_key	keywrk(int argc, char **argv, char **envp)
+t_key	*keywrk(int argc, char **argv, char **envp)
 {
-	t_key	key;
+	t_key	*key;
 
 	key = malloc(sizeof(t_key));
+	if (!key)
+		px_error("malloc");
 	key->ac = argc;
 	key->av = argv;
 	key->env = envp;
-	key->in = argc[1];
-	key->out = argc[argc - 1];
+	key->out = argv[argc - 1];
 	if (ft_strncmp(argv[1], "heredoc", ft_strlen(argv[1])))
+	{
 		key->cmdcount = argc - 4;
+		key->in = heredoc(argv[2]);
+	}
 	else
+	{
 		key->cmdcount = argc - 3;
+		key->in = argv[1];
+	}
 	key->cmds = cmdparser(key->cmdcount, argv, envp);
 	if (!key->cmds)
-		px_error("pipex_bonus: malloc");
+		px_error("malloc");
 	return (key);
 }
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_key	key;
+	t_key	*key;
 
 	if (argc < 5)
 		px_error("pipex: not enough arguments");

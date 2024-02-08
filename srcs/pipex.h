@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 23:52:21 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/08 15:01:24 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/08 17:10:43 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ void	px_free(char **in);
 char	*px_getpath(char *cmd, char **envp);
 char	**px_cmdwrk(const char *cmd);
 void	px_excec(const char *cmd, char **envp);
+void	px_3dfree(void ***array);
 
 #endif
