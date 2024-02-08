@@ -6,30 +6,12 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 23:52:06 by hlibine           #+#    #+#             */
-/*   Updated: 2024/01/31 10:26:28 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/08 13:08:07 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../srcs/pipex.h"
 #include "get_next_line/get_next_line.h"
-
-void	excec(const char *cmd, char **envp)
-{
-	char	**s_cmd;
-	char	*path;
-
-	s_cmd = ft_split(cmd, ' ');
-	if (!s_cmd)
-		exit(EXIT_FAILURE);
-	path = bonus_px_getpath(s_cmd[0], envp);
-	if (execve(path, &s_cmd[0], envp) == -1)
-	{
-		ft_putstr_fd("pipex error: command not found: ", 2);
-		ft_putendl_fd(s_cmd[0], 2);
-		px_free(s_cmd);
-		exit(EXIT_FAILURE);
-	}
-}
 
 void	pipewrk(char *cmd, char **envp)
 {
@@ -45,7 +27,7 @@ void	pipewrk(char *cmd, char **envp)
 	{
 		close(fd[0]);
 		dup2(fd[1], STDOUT_FILENO);
-		excec(cmd, envp);
+		px_excec(cmd, envp);
 	}
 	else
 	{
@@ -114,7 +96,7 @@ int	main(int argc, char **argv, char **envp)
 	while (i < argc - 3)
 		pipewrk(argv[i++], envp);
 	dup2(fdio[1], STDOUT_FILENO);
-	excec(argv[argc - 2], envp);
+	px_excec(argv[argc - 2], envp);
 	if (fdio)
 	{
 		unlink(".swap");

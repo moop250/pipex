@@ -6,30 +6,11 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 23:52:06 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/07 16:09:34 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/08 11:45:58 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-void	excec(const char *cmd, char **envp)
-{
-	char	**s_cmd;
-	char	*path;
-
-	s_cmd = px_cmdwrk(cmd);
-	if (!s_cmd)
-		exit(EXIT_FAILURE);
-	path = px_getpath(s_cmd[0], envp);
-	if (execve(path, &s_cmd[0], envp) == -1)
-	{
-		ft_putstr_fd("pipex: ", 2);
-		ft_putstr_fd(s_cmd[0], 2);
-		ft_putendl_fd(": command not found", 2);
-		px_free(s_cmd);
-		exit(127);
-	}
-}
 
 void	child_ps(int *e_fd, char **argv, char **envp)
 {
@@ -42,7 +23,7 @@ void	child_ps(int *e_fd, char **argv, char **envp)
 	close(e_fd[0]);
 	dup2(e_fd[1], STDOUT_FILENO);
 	close(e_fd[1]);
-	excec(argv[2], envp);
+	px_excec(argv[2], envp);
 }
 
 void	child2_ps(int *e_fd, char **argv, char **envp)
@@ -56,7 +37,7 @@ void	child2_ps(int *e_fd, char **argv, char **envp)
 	close(e_fd[1]);
 	dup2(e_fd[0], STDIN_FILENO);
 	close(e_fd[0]);
-	excec(argv[3], envp);
+	px_excec(argv[3], envp);
 }
 
 void	parent_ps(int *fd, char **argv, char **envp, int *pid)

@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 18:20:09 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/06 11:11:13 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/08 11:45:04 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,25 @@ void	px_free(char **in)
 	while (in[++i])
 		free(in[i]);
 	free(in);
+}
+
+void	px_excec(const char *cmd, char **envp)
+{
+	char	**s_cmd;
+	char	*path;
+
+	s_cmd = px_cmdwrk(cmd);
+	if (!s_cmd)
+		exit(EXIT_FAILURE);
+	path = px_getpath(s_cmd[0], envp);
+	if (execve(path, &s_cmd[0], envp) == -1)
+	{
+		ft_putstr_fd("pipex: ", 2);
+		ft_putstr_fd(s_cmd[0], 2);
+		ft_putendl_fd(": command not found", 2);
+		px_free(s_cmd);
+		exit(127);
+	}
 }
 
 char	*envpwrk(char *in, char **envp)

@@ -6,7 +6,7 @@
 #    By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/23 16:16:12 by hlibine           #+#    #+#              #
-#    Updated: 2024/02/05 15:32:18 by hlibine          ###   ########.fr        #
+#    Updated: 2024/02/08 11:33:07 by hlibine          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,6 @@ SRCS = srcs/px_utils.c \
 		srcs/px_cmdprocess.c \
 
 BONUS_SRCS = bonus/pipex_bonus.c \
-		bonus/px_utils_bonus.c \
 		bonus/get_next_line/get_next_line_utils.c \
 		bonus/get_next_line/get_next_line.c \
 
