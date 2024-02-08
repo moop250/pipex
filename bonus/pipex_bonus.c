@@ -6,17 +6,12 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 23:52:06 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/08 15:26:40 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/08 16:00:51 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../srcs/pipex.h"
 #include "get_next_line/get_next_line.h"
-
-void	pipewrk(t_key key)
-{
-
-}
 
 int	heredoc(char *limiter)
 {
@@ -43,6 +38,11 @@ int	heredoc(char *limiter)
 	return (flag);
 }
 
+void	pipewrk(t_key key)
+{
+	
+}
+
 char ***cmdparser(int cmds, char **argv, char **envp)
 {
 	char	***out;
@@ -59,6 +59,8 @@ char ***cmdparser(int cmds, char **argv, char **envp)
 	while (i < cmds)
 	{
 		out[i] = px_cmdwrk(argv[a]);
+		if (!out[i])
+			//make freeing function
 		++i;
 		++a;
 	}
