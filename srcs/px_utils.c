@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 18:20:09 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/08 11:45:04 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/09 15:10:44 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	px_error(char *in)
 {
+	if (access(".swap", F_OK) == 0)
+		unlink(".swap");
 	perror(in);
 	exit(EXIT_FAILURE);
 }

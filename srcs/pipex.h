@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 23:52:21 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/08 17:10:43 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/09 15:10:33 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define PIPEX_H
 # include <fcntl.h>
 # include <unistd.h>
-# include "libft/srcs/libft.h"
+# include "extended_ft/srcs/extended_ft.h"
 # include <errno.h>
 # include <stdio.h>
 

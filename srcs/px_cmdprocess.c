@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:33:55 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/08 13:06:01 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/09 15:10:05 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,6 @@ int	findstart(int i, int *flag, const char *cmd)
 	return (i);
 }
 
-void	*ft_realloc(void *in, size_t oldsize, size_t newsize)
-{
-	void	*out;
-
-	out = malloc(newsize);
-	if (!out)
-		return (NULL);
-	if (!in)
-		return (out);
-	out = ft_memcpy(out, in, oldsize);
-	free(in);
-	return (out);
-}
-
 char	**outwrk(char **out, int *i, int *pos, const char *cmd)
 {
 	int	cs;
@@ -63,6 +49,7 @@ char	**outwrk(char **out, int *i, int *pos, const char *cmd)
 /*
 i[0] == position in cmd
 i[1] == position in out array
+i[2] == flag
 pos[0] == start
 pos[1] == end
 */
