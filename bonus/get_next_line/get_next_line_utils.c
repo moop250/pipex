@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:10:57 by hlibine           #+#    #+#             */
-/*   Updated: 2024/01/08 14:02:22 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/09 16:44:56 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*gnl_strjoin(char const *s1, char const *s2)
 	i = 0;
 	l1 = gnl_strlen(s1);
 	l2 = gnl_strlen(s2);
-	out = malloc(l1 + l2 + 1);
+	out = galloc(l1 + l2 + 1);
 	if (out == NULL)
 		return (NULL);
 	while (i < (l1 + l2))
@@ -72,7 +72,7 @@ char	*gnl_strdup(const char *s1)
 	size_t	len;
 
 	len = gnl_strlen(s1) + 1;
-	out = malloc(len);
+	out = galloc(len);
 	if (out == NULL)
 		return (NULL);
 	gnl_strlcpy(out, s1, len);

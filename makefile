@@ -6,7 +6,7 @@
 #    By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/23 16:16:12 by hlibine           #+#    #+#              #
-#    Updated: 2024/02/09 15:09:48 by hlibine          ###   ########.fr        #
+#    Updated: 2024/02/09 16:06:10 by hlibine          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ BONUS_SRCS = bonus/pipex_bonus.c \
 		bonus/get_next_line/get_next_line_utils.c \
 		bonus/get_next_line/get_next_line.c \
 
-INCLUDE = -L ./srcs/extended_ft -lft
+INCLUDE = -L ./srcs/extended_ft/ -lft
 
 GREEN = \033[0;32m
 ORANGE = \033[38;5;208m

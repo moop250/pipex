@@ -6,11 +6,12 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:10:14 by hlibine           #+#    #+#             */
-/*   Updated: 2024/01/08 13:51:25 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/09 16:50:44 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include "../../srcs/pipex.h"
 
 int	gnl_strlen(const char *s)
 {
@@ -62,7 +63,7 @@ void	filewrk(int fd, char **clean)
 			break ;
 		buf[bytes_read] = '\0';
 		tmp = gnl_strjoin(*clean, buf);
-		free(*clean);
+		gfree(*clean);
 		*clean = tmp;
 		if (!*clean)
 			break ;
@@ -76,7 +77,7 @@ char	*cleanup(char **clean, int i)
 	char	*tmp;
 	char	*out;
 
-	out = malloc(i * sizeof(char));
+	out = galloc(i * sizeof(char));
 	if (!out)
 		return (NULL);
 	i = gnl_strlcpy(out, *clean, i);
@@ -86,12 +87,12 @@ char	*cleanup(char **clean, int i)
 		tmp = gnl_strdup(*clean + len + 1);
 		if (!tmp)
 			return (NULL);
-		free(*clean);
+		gfree(*clean);
 		*clean = tmp;
 	}
 	else
 	{
-		free(*clean);
+		gfree(*clean);
 		*clean = NULL;
 	}
 	return (out);
@@ -105,16 +106,16 @@ char	*get_next_line(int fd)
 
 	if (read(fd, NULL, 0) < 0)
 	{
-		free(clean);
+		gfree(clean);
 		clean = 0;
-		return (NULL);
+		px_error("gnl error");
 	}
 	filewrk(fd, &clean);
 	if (!clean || *clean == '\0')
 	{
-		free(clean);
+		gfree(clean);
 		clean = NULL;
-		return (NULL);
+		px_error("gnl error");
 	}
 	i = gnl_strlencust(clean);
 	if (clean[i] == '\n')

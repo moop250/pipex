@@ -6,13 +6,13 @@
 #    By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/18 15:13:08 by hlibine           #+#    #+#              #
-#    Updated: 2024/02/09 15:30:36 by hlibine          ###   ########.fr        #
+#    Updated: 2024/02/09 16:06:28 by hlibine          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 
-NAME = extended_ft.a
+NAME = libft.a
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror

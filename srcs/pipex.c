@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 23:52:06 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/08 11:45:58 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/09 16:09:13 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,5 @@ int	main(int argc, char **argv, char **envp)
 	if (!pid[0])
 		child_ps(fd, argv, envp);
 	parent_ps(fd, argv, envp, pid);
+	razegarbage();
 }
