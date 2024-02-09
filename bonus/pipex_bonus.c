@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 23:52:06 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/09 15:18:16 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/09 15:53:59 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	pipewrk(t_key *key)
 		
 		ft_lstadd_front(pid, ft_lstnew(fork())); 
 		if (!*pid->content)
-			px_error("malloc")
+			px_error("galloc")
 		else if (*pid->content == -1)
 			px_error("fork");
 		else
@@ -74,9 +74,9 @@ char ***cmdparser(int cmds, char **argv, char **envp)
 	a = 2;
 	if (ft_strncmp(argv[1], "heredoc", ft_strlen(argv[1])))
 		a = 3;
-	out = malloc(cmds * sizeof(char**));
+	out = galloc(cmds * sizeof(char**));
 	if (!out)
-		return(NULL);
+		px_error("malloc");
 	while (i < cmds)
 	{
 		out[i] = px_cmdwrk(argv[a]);
@@ -92,7 +92,7 @@ t_key	*keywrk(int argc, char **argv, char **envp)
 {
 	t_key	*key;
 
-	key = malloc(sizeof(t_key));
+	key = galloc(sizeof(t_key));
 	if (!key)
 		px_error("malloc");
 	key->ac = argc;

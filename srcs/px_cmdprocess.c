@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:33:55 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/09 15:10:05 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/09 15:51:23 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,11 @@ char	**outwrk(char **out, int *i, int *pos, const char *cmd)
 
 	cs = sizeof(char *);
 	out = ft_realloc(out, i[1] * cs, (i[1] + 2) * cs);
+	if (!out)
+		px_error("malloc");
 	out[i[1]] = ft_substr(cmd, pos[0], pos[1] - pos[0]);
+	if (!out[i[1]])
+		px_error("malloc");
 	out[i[1] + 1] = NULL;
 	return (out);
 }

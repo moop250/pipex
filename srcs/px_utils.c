@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 18:20:09 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/09 15:10:44 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/09 15:57:28 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	px_error(char *in)
 	if (access(".swap", F_OK) == 0)
 		unlink(".swap");
 	perror(in);
+	razegarbage();
 	exit(EXIT_FAILURE);
 }
 
@@ -26,8 +27,8 @@ void	px_free(char **in)
 
 	i = -1;
 	while (in[++i])
-		free(in[i]);
-	free(in);
+		gfree(in[i]);
+	gfree(in);
 }
 
 void	px_excec(const char *cmd, char **envp)
@@ -64,10 +65,10 @@ char	*envpwrk(char *in, char **envp)
 		str = ft_substr(envp[i], 0, a);
 		if (ft_strncmp(str, in, ft_strlen(in)) == 0)
 		{
-			free(str);
+			gfree(str);
 			return (envp[i] + a + 1);
 		}
-		free(str);
+		gfree(str);
 		i++;
 	}
 	return (NULL);
@@ -88,13 +89,13 @@ char	*px_getpath(char *cmd, char **envp)
 	{
 		path_part = ft_strjoin(allpath[i], "/");
 		exec = ft_strjoin(path_part, s_cmd[0]);
-		free(path_part);
+		gfree(path_part);
 		if (access(exec, F_OK | X_OK) == 0)
 		{
 			px_free(s_cmd);
 			return (exec);
 		}
-		free(exec);
+		gfree(exec);
 	}
 	px_free(allpath);
 	px_free(s_cmd);
