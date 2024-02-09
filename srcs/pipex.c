@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 23:52:06 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/09 16:09:13 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/09 18:50:52 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ void	parent_ps(int *fd, char **argv, char **envp, int *pid)
 	int	status;
 	int	i;
 
-	i = -0;
+	i = -1;
 	pid[1] = fork();
 	if (pid[1] == -1)
 		px_error("pipex: Failed to open fork");
-	if (!pid[1])
+	else if (!pid[1])
 		child2_ps(fd, argv, envp);
 	close(fd[1]);
 	while (++i < 2)
@@ -74,7 +74,7 @@ int	main(int argc, char **argv, char **envp)
 	pid[0] = fork();
 	if (pid[0] == -1)
 		px_error("pipex: Failed to open fork");
-	if (!pid[0])
+	else if (!pid[0])
 		child_ps(fd, argv, envp);
 	parent_ps(fd, argv, envp, pid);
 	razegarbage();
