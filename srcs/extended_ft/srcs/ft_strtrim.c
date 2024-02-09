@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 16:12:13 by hlibine           #+#    #+#             */
-/*   Updated: 2023/11/03 15:34:01 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/09 15:33:01 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char	*ft_strmkr(const char *s1, int s, int e)
 
 	if (s >= ft_strlen(s1))
 		return (ft_strdup(""));
-	out = malloc (e - s + 1);
+	out = galloc (e - s + 1);
 	if (out == NULL)
 		return (NULL);
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 11:55:08 by hlibine           #+#    #+#             */
-/*   Updated: 2023/11/03 15:34:05 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/09 15:33:01 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if ((size_t)ft_strlen(s) < start)
 		return (ft_strdup(""));
 	if (len < l)
-		out = malloc(len + 1);
+		out = galloc(len + 1);
 	else
-		out = malloc(l + 1);
+		out = galloc(l + 1);
 	if (out == NULL)
 		return (NULL);
 	i = 0;

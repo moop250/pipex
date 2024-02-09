@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:11:29 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/09 15:14:27 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/09 15:43:20 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ void	ft_3dfree(void ***array)
 		a = 0;
 		while (array[i][a])
 		{
-			free(array[i][a]);
+			gfree(array[i][a]);
 			++a;
 		}
-		free(array[i]);
+		gfree(array[i]);
 		++i;
 	}
-	free(array);
+	gfree(array);
 }

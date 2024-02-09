@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:56:23 by hlibine           #+#    #+#             */
-/*   Updated: 2023/11/03 15:32:33 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/09 15:33:01 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*ft_itoa(int n)
 	else if (n == -2147483648)
 		return (ft_strdup("-2147483648"));
 	i = ft_digicount(n);
-	out = (char *)malloc(((i + 1) * sizeof(char)));
+	out = (char *)galloc(((i + 1) * sizeof(char)));
 	if (out == NULL)
 		return (NULL);
 	if (n < 0)

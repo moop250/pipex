@@ -6,13 +6,13 @@
 #    By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/18 15:13:08 by hlibine           #+#    #+#              #
-#    Updated: 2024/02/09 15:06:26 by hlibine          ###   ########.fr        #
+#    Updated: 2024/02/09 15:30:36 by hlibine          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 
-NAME = libft.a
+NAME = extended_ft.a
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
@@ -57,8 +57,7 @@ FILES = srcs/ft_atoi \
 			srcs/ft_3dfree \
 			srcs/garbage_collecter \
 			srcs/gargabe_collector_utils \
-
-BONUS = srcs/ft_lstnew \
+			srcs/ft_lstnew \
 			srcs/ft_lstadd_front \
 			srcs/ft_lstsize \
 			srcs/ft_lstlast \
@@ -70,15 +69,11 @@ BONUS = srcs/ft_lstnew \
 
 SRCS_DIR = ./
 SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
-SRCSBONUS_DIR = ./
-SRCSBONUS = $(addprefix $(SRCSBONUS_DIR), $(addsuffix .c, $(BONUS)))
 
 OBJS_DIR = ./
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
-OBJSBONUS_DIR = ./
-OBJSBONUS = $(addprefix $(OBJSBONUS_DIR), $(addsuffix .o, $(BONUS)))
 
-.c.o: $(SRCS) $(BONUS)
+.c.o: $(SRCS)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 $(NAME): $(OBJS)
@@ -86,16 +81,12 @@ $(NAME): $(OBJS)
 	
 
 all: $(NAME)
-
-bonus: $(OBJS) $(OBJSBONUS)
-	$(AR) $(NAME) $(OBJS) $(OBJSBONUS)
-
 clean:
-	$(RM) $(OBJS) $(OBJSBONUS)
+	$(RM) $(OBJS)
 
 fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re

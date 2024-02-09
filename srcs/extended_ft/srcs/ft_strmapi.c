@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 10:02:23 by hlibine           #+#    #+#             */
-/*   Updated: 2023/10/19 11:49:10 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/09 15:33:01 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	int		i;
 
 	i = 0;
-	out = malloc(ft_strlen(s) + 1);
+	out = galloc(ft_strlen(s) + 1);
 	if (out == NULL)
 		return (NULL);
 	while (s[i])
