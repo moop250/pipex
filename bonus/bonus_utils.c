@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:00:04 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/12 16:32:42 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/12 17:23:39 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,27 +28,36 @@ void	px_outfile(t_key *key, int argc, char **argv)
 		px_error("outfile");
 }
 
-void	px_child_start()
+void	px_child(t_key *key, int pos, int *pipe0, int *pipe1)
 {
-	if ()
-}
-
-void	px_middle_child()
-{
-	
-}
-
-void	px_child(t_key *key, int childnum, int *pipe0, int *pipe1)
-{
-	if (childnum == 0)
+	if (pos == 0)
+	{
 		dup2(key->in, STDIN_FILENO);
+		close(key->in);
+	}
 	else
+	{
 		dup2(pipe1[0], STDIN_FILENO);
-	if (childnum == key->cmdcount)
+		close(pipe1[0]);
+	}
+	if (pos == key->cmdcount)
+	{
 		dup2(key->out, STDOUT_FILENO);
+		close(key->out);
+	}
 	else
+	{
 		dup2(pipe0[1]);
-	execv(px_getpath(key->cmds[childnum][0]), &key->cmds[childnum], key->env)
+		close(pipe0[1]);
+	}
+	if (execve(px_getpath(key->cmds[pos][0]), &key->cmds[pos], key->env) == -1)
+	{
+		ft_putstr_fd("pipex: ", 2);
+		ft_putstr_fd(key->cmds[pos][0], 2);
+		ft_putendl_fd(": command not found", 2);
+		razegarbage();
+		exit(127);
+	}
 }
 
 void	px_waitchild(t_list pid)
