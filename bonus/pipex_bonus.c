@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 23:52:06 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/09 18:49:56 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/12 15:05:09 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,10 @@ void	pipewrk(t_key *key)
 		else if (!*pid->content)
 			px_child(key, i, pipes[0], pipes[1]);
 		close(pipe[0][1]);
+		pipe[1][0] = 
 		
 	}
-	px_waitchildren()
+	px_waitchildren(pid);
 }
 
 int	main(int argc, char **argv, char **envp)
