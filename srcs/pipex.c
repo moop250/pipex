@@ -6,12 +6,13 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 23:52:06 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/09 18:50:52 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/13 15:23:43 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
+//e_fd = external file descriptor
 void	child_ps(int *e_fd, char **argv, char **envp)
 {
 	int	fd;
@@ -26,6 +27,7 @@ void	child_ps(int *e_fd, char **argv, char **envp)
 	px_excec(argv[2], envp);
 }
 
+//e_fd = external file descriptor
 void	child2_ps(int *e_fd, char **argv, char **envp)
 {
 	int	fd;
@@ -62,6 +64,7 @@ void	parent_ps(int *fd, char **argv, char **envp, int *pid)
 	exit(status);
 }
 
+//fd is the pipe (i know poor naming convention but i wat tired)
 int	main(int argc, char **argv, char **envp)
 {
 	int		fd[2];
