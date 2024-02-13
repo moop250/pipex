@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:10:43 by hlibine           #+#    #+#             */
-/*   Updated: 2024/01/08 13:49:54 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/13 15:43:57 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
+# include "../../srcs/pipex.h"
 
 char	*get_next_line(int fd);
 int		gnl_strlen(const char *s);

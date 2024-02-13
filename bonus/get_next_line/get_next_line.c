@@ -6,12 +6,11 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:10:14 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/09 16:50:44 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/13 15:43:51 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include "../../srcs/pipex.h"
 
 int	gnl_strlen(const char *s)
 {

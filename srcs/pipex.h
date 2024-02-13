@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 23:52:21 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/12 11:47:17 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/13 15:41:34 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "extended_ft/srcs/extended_ft.h"
 # include <errno.h>
 # include <stdio.h>
+# include <stdbool.h>
 
 typedef struct s_key
 {
@@ -24,6 +25,7 @@ typedef struct s_key
 	char	**av;
 	char	**env;
 	int		in;
+	bool	heredoc;
 	int		out;
 	int		cmdcount;
 	char	***cmds;
@@ -36,6 +38,6 @@ char	**px_cmdwrk(const char *cmd);
 void	px_excec(const char *cmd, char **envp);
 void	px_outfile(t_key *key, int argc, char **argv);
 void	px_child(t_key *key, int childnum, int *pipe0, int *pipe1);
-void	px_waitchild(t_list pid);
+void	px_waitchild(t_list *pid, t_key *key);
 
 #endif

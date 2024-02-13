@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 23:52:06 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/12 15:05:09 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/13 16:24:24 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	heredoc(t_key *key)
 	gfree(out);
 }
 
-char ***cmdparser(int cmds, char **argv, char **envp)
+char ***cmdparser(int cmds, bool heredoc, char **argv)
 {
 	char	***out;
 	int		i;
@@ -45,7 +45,7 @@ char ***cmdparser(int cmds, char **argv, char **envp)
 
 	i = 0;
 	a = 1;
-	if (ft_strncmp(argv[1], "heredoc", ft_strlen(argv[1])))
+	if (heredoc)
 		a = 2;
 	out = galloc(cmds * sizeof(char**));
 	while (i < cmds)
@@ -65,6 +65,10 @@ t_key	*keywrk(int argc, char **argv, char **envp)
 	key->ac = argc;
 	key->av = argv;
 	if (!ft_strncmp(key->av[1], "heredoc", ft_strlen(key->av[1])))
+		key->heredoc = true;
+	else
+		key->heredoc = false;
+	if (!key->heredoc)
 		key->in = open(key->av[1], O_RDONLY, 0644);
 	else
 		heredoc(key);
@@ -72,7 +76,7 @@ t_key	*keywrk(int argc, char **argv, char **envp)
 		px_error("infile");
 	key->env = envp;
 	px_outfile(key, argc, argv);
-	key->cmds = cmdparser(key->cmdcount, argv, envp);
+	key->cmds = cmdparser(key->cmdcount, key->heredoc, argv);
 	return (key);
 }
 
@@ -90,16 +94,17 @@ void	pipewrk(t_key *key)
 		pipe(pipes[0]);
 		pidt = galloc(sizeof(pid_t));
 		pidt = fork();
-		ft_lstadd_front(pid, ft_lstnew(pidt)); 
+		ft_lstadd_front(&pid, ft_lstnew(&pidt)); 
 		if (*pid->content == -1)
 			px_error("fork");
 		else if (!*pid->content)
 			px_child(key, i, pipes[0], pipes[1]);
-		close(pipe[0][1]);
-		pipe[1][0] = 
-		
+		close (pipes[0][1]);
+		if (pipes[1])
+			close (pipes[1][0]);
+		pipes[1] = pipes[0];
 	}
-	px_waitchildren(pid);
+	px_waitchild(pid, key);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -114,6 +119,7 @@ int	main(int argc, char **argv, char **envp)
 	if (access(".swap", F_OK) == 0)
 		unlink(".swap");
 	razegarbage();
+	return (1);
 }
 
 /* int	main(void)
