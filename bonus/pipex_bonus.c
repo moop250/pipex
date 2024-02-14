@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 23:52:06 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/14 11:36:43 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/14 17:16:46 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	heredoc(t_key *key)
 	gfree(out);
 }
 
-char ***cmdparser(int cmds, bool heredoc, char **argv)
+char	***cmdparser(int cmds, bool heredoc, char **argv)
 {
 	char	***out;
 	int		i;
@@ -47,7 +47,7 @@ char ***cmdparser(int cmds, bool heredoc, char **argv)
 	a = 1;
 	if (heredoc)
 		a = 2;
-	out = galloc(cmds * sizeof(char**));
+	out = galloc(cmds * sizeof(char **));
 	while (i < cmds)
 	{
 		out[i] = px_cmdwrk(argv[a]);
@@ -109,8 +109,8 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_key	*key;
 
-	if (argc < 5 || (argc < 6 &&
-		!ft_strncmp(argv[1], "heredoc", ft_strlen(argv[1]))))
+	if (argc < 5 || (argc < 6
+			&& !ft_strncmp(argv[1], "heredoc", ft_strlen(argv[1]))))
 		px_error("not enough arguments");
 	key = keywrk(argc, argv, envp);
 	pipewrk(key);

@@ -6,12 +6,11 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:00:04 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/14 13:33:34 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/14 17:14:18 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../srcs/pipex.h"
-
 
 /*
 	with heredoc there is 4 argc params so i do -5 to compenasate
@@ -62,7 +61,6 @@ void	px_duppage(t_key *key, int pos, int *pipe0, int *pipe1)
 	else
 		dup2(pipe0[1], STDOUT_FILENO);
 	close(pipe0[1]);
-
 }
 
 void	px_child(t_key *key, int pos, int *pipe0, int *pipe1)
