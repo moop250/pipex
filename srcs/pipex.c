@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 23:52:06 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/13 15:23:43 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/14 14:02:41 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	child_ps(int *e_fd, char **argv, char **envp)
 	dup2(fd, STDIN_FILENO);
 	close(e_fd[0]);
 	dup2(e_fd[1], STDOUT_FILENO);
-	close(e_fd[1]);
 	px_excec(argv[2], envp);
 }
 
@@ -38,7 +37,6 @@ void	child2_ps(int *e_fd, char **argv, char **envp)
 	dup2(fd, STDOUT_FILENO);
 	close(e_fd[1]);
 	dup2(e_fd[0], STDIN_FILENO);
-	close(e_fd[0]);
 	px_excec(argv[3], envp);
 }
 
@@ -61,6 +59,7 @@ void	parent_ps(int *fd, char **argv, char **envp, int *pid)
 	else
 		status = 0;
 	close(fd[0]);
+	close(fd[1]);
 	exit(status);
 }
 

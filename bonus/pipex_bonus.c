@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 23:52:06 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/13 16:24:24 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/14 11:36:43 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,29 +82,27 @@ t_key	*keywrk(int argc, char **argv, char **envp)
 
 void	pipewrk(t_key *key)
 {
-	t_list	*pid;
+	pid_t	*pid;
 	int		*pipes[2];
 	int		i;
-	pid_t	pidt;
 
 	i = -1;
+	pid = galloc(sizeof(pid_t) * (key->cmdcount + 1));
 	while (++i < key->cmdcount)
 	{
 		pipes[0] = galloc(sizeof(int) * 2);
 		pipe(pipes[0]);
-		pidt = galloc(sizeof(pid_t));
-		pidt = fork();
-		ft_lstadd_front(&pid, ft_lstnew(&pidt)); 
-		if (*pid->content == -1)
+		pid[i] = fork();
+		if (pid[i] == -1)
 			px_error("fork");
-		else if (!*pid->content)
+		else if (pid[i] == 0)
 			px_child(key, i, pipes[0], pipes[1]);
 		close (pipes[0][1]);
 		if (pipes[1])
 			close (pipes[1][0]);
 		pipes[1] = pipes[0];
 	}
-	px_waitchild(pid, key);
+	px_waitchild(pid);
 }
 
 int	main(int argc, char **argv, char **envp)

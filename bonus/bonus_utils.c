@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:00:04 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/13 15:34:00 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/14 13:33:34 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	px_outfile(t_key *key, int argc, char **argv)
 		px_error("outfile");
 }
 
-void	errcmd(t_key key)
+void	errcmd(t_key *key, int pos)
 {
 	ft_putstr_fd("pipex: ", 2);
 	ft_putstr_fd(key->cmds[pos][0], 2);
@@ -44,7 +44,7 @@ void	errcmd(t_key key)
 	exit(127);
 }
 
-void	px_duppage(t_key *key, int pos)
+void	px_duppage(t_key *key, int pos, int *pipe0, int *pipe1)
 {
 	if (pos == 0)
 	{
@@ -60,7 +60,7 @@ void	px_duppage(t_key *key, int pos)
 		close(key->out);
 	}
 	else
-		dup2(pipe0[1]);
+		dup2(pipe0[1], STDOUT_FILENO);
 	close(pipe0[1]);
 
 }
@@ -69,24 +69,24 @@ void	px_child(t_key *key, int pos, int *pipe0, int *pipe1)
 {
 	char	*path;
 
-	path = px_getpath(key->cmds[pos][0]);
-	px_duppage(key, pos);
+	path = px_getpath(key->cmds[pos][0], key->env);
+	px_duppage(key, pos, pipe0, pipe1);
 	if (access (key->cmds[pos][0], R_OK & X_OK) < 0)
-		errcmd(key);
-	execve(path, &key->cmds[pos], key->env);
+		errcmd(key, pos);
+	execve(path, key->cmds[pos], key->env);
 	exit(127);
 }
 
-void	px_waitchild(t_list *pid, t_key *key)
+void	px_waitchild(pid_t *pid)
 {
 	int	i;
 	int	status;
 
 	i = -1;
-	while (pid)
+	while (pid[++i])
 	{
-		waitpid(*pid->content, &status, 0);
-		pid = pid->next;
+		waitpid(pid[i], &status, 0);
+		gfree(&pid[i]);
 	}
 	if (WIFEXITED(status))
 		status = WEXITSTATUS(status);
