@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 23:52:06 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/14 14:02:41 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/14 17:07:32 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	child_ps(int *e_fd, char **argv, char **envp)
 	close(e_fd[0]);
 	dup2(e_fd[1], STDOUT_FILENO);
 	px_excec(argv[2], envp);
+	exit(127);
 }
 
 //e_fd = external file descriptor
@@ -38,6 +39,7 @@ void	child2_ps(int *e_fd, char **argv, char **envp)
 	close(e_fd[1]);
 	dup2(e_fd[0], STDIN_FILENO);
 	px_excec(argv[3], envp);
+	exit(127);
 }
 
 void	parent_ps(int *fd, char **argv, char **envp, int *pid)
@@ -52,14 +54,13 @@ void	parent_ps(int *fd, char **argv, char **envp, int *pid)
 	else if (!pid[1])
 		child2_ps(fd, argv, envp);
 	close(fd[1]);
+	close(fd[0]);
 	while (++i < 2)
 		waitpid(pid[i], &status, 0);
 	if (WIFEXITED(status))
 		status = WEXITSTATUS(status);
 	else
 		status = 0;
-	close(fd[0]);
-	close(fd[1]);
 	exit(status);
 }
 
