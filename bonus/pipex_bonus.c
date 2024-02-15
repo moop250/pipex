@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 23:52:06 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/15 10:46:50 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/15 16:48:00 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ void	pipewrk(t_key *key)
 		if (pipes[1])
 			close (pipes[1][0]);
 		pipes[1] = pipes[0];
+		//debugging print :3
+		ft_putendl_fd("im here", 2);
 	}
 	px_waitchild(pid, key);
 }
