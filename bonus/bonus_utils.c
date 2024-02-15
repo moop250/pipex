@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:00:04 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/14 17:14:18 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/15 10:46:43 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,17 +75,14 @@ void	px_child(t_key *key, int pos, int *pipe0, int *pipe1)
 	exit(127);
 }
 
-void	px_waitchild(pid_t *pid)
+void	px_waitchild(pid_t *pid, t_key *key)
 {
 	int	i;
 	int	status;
 
 	i = -1;
-	while (pid[++i])
-	{
+	while (++i < key->cmdcount)
 		waitpid(pid[i], &status, 0);
-		gfree(&pid[i]);
-	}
 	if (WIFEXITED(status))
 		status = WEXITSTATUS(status);
 	razegarbage();
