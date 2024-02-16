@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:00:04 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/15 10:46:43 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/16 18:58:47 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,8 @@ void	px_child(t_key *key, int pos, int *pipe0, int *pipe1)
 
 	path = px_getpath(key->cmds[pos][0], key->env);
 	px_duppage(key, pos, pipe0, pipe1);
-	if (access (key->cmds[pos][0], R_OK & X_OK) < 0)
+	if(execve(path, key->cmds[pos], key->env) == -1)
 		errcmd(key, pos);
-	execve(path, key->cmds[pos], key->env);
 	exit(127);
 }
 

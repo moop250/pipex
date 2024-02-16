@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 23:52:06 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/15 16:48:00 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/16 18:01:36 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ char	***cmdparser(int cmds, bool heredoc, char **argv)
 	int		a;
 
 	i = 0;
-	a = 1;
+	a = 2;
 	if (heredoc)
-		a = 2;
+		a = 3;
 	out = galloc(cmds * sizeof(char **));
-	while (i < cmds)
+	while (i <=cmds)
 	{
 		out[i] = px_cmdwrk(argv[a]);
 		++i;
@@ -88,7 +88,7 @@ void	pipewrk(t_key *key)
 
 	i = -1;
 	pid = galloc(sizeof(pid_t) * (key->cmdcount + 1));
-	while (++i < key->cmdcount)
+	while (++i <= key->cmdcount)
 	{
 		pipes[0] = galloc(sizeof(int) * 2);
 		pipe(pipes[0]);
@@ -101,8 +101,6 @@ void	pipewrk(t_key *key)
 		if (pipes[1])
 			close (pipes[1][0]);
 		pipes[1] = pipes[0];
-		//debugging print :3
-		ft_putendl_fd("im here", 2);
 	}
 	px_waitchild(pid, key);
 }

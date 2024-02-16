@@ -6,7 +6,7 @@
 #    By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/23 16:16:12 by hlibine           #+#    #+#              #
-#    Updated: 2024/02/14 11:38:01 by hlibine          ###   ########.fr        #
+#    Updated: 2024/02/16 16:01:55 by hlibine          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,15 +19,15 @@ RM = rm -f
 EXTENDED_FT = srcs/extended_ft/
 BONUS = pipex_bonus
 
-SRCS_PX = srcs/pipex.c \
+SRCS_PX = srcs/pipex.c\
 
-SRCS = srcs/px_utils.c \
-		srcs/px_cmdprocess.c \
+SRCS = srcs/px_utils.c\
+		srcs/px_cmdprocess.c\
 
-BONUS_SRCS = bonus/pipex_bonus.c \
-		bonus/bonus_utils.c \
-		bonus/get_next_line/get_next_line_utils.c \
-		bonus/get_next_line/get_next_line.c \
+BONUS_SRCS = bonus/pipex_bonus.c\
+		bonus/bonus_utils.c\
+		bonus/get_next_line/get_next_line_utils.c\
+		bonus/get_next_line/get_next_line.c\
 
 INCLUDE = -L ./srcs/extended_ft/ -lft
 
