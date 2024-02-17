@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 23:52:06 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/17 01:48:00 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/17 02:54:46 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void	pipewrk(t_key *key)
 	px_waitchild(pid, key);
 }
 
+//need to make it not work on just here instead of heredoc
 int	main(int argc, char **argv, char **envp)
 {
 	t_key	*key;
