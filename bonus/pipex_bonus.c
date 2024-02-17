@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 23:52:06 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/16 18:01:36 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/17 01:44:07 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	heredoc(t_key *key)
 	char	*line;
 	char	*out;
 	int		flag;
+	char	*tmp;
 
 	out = ft_strdup("");
 	flag = 0;
@@ -25,12 +26,16 @@ void	heredoc(t_key *key)
 	{
 		line = get_next_line(0);
 		if (ft_strncmp(key->av[2], line, ft_strlen(line) - 1) != 0)
-			out = ft_strjoin(out, line);
+		{
+			tmp = ft_strjoin(out, line);
+			gfree(out);
+			out = tmp;
+		}
 		else
 			flag = 1;
 		gfree(line);
 	}
-	key->in = open(".swap", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	key->in = open(".swap", O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (key->in < 0)
 		px_error("Error: Failed to create swap file");
 	ft_putstr_fd(out, key->in);
