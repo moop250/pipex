@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:00:04 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/19 13:40:03 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/19 15:57:09 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,14 @@ void	errcmd(t_key *key, int pos)
 void	px_duppage(t_key *key, int pos, int *pipe0, int *pipe1)
 {
 	if (pos == 0)
+	{
+		if (access(".swap", F_OK) == 0)
+		{
+			close(key->in);
+			key->in = open(".swap", O_RDONLY);
+		}
 		dup2(key->in, STDIN_FILENO);
+	}
 	else
 		dup2(pipe1[0], STDIN_FILENO);
 	close(pipe1[0]);
