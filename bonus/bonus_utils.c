@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:00:04 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/17 02:33:03 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/19 13:40:03 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	px_child(t_key *key, int pos, int *pipe0, int *pipe1)
 
 	path = px_getpath(key->cmds[pos][0], key->env);
 	px_duppage(key, pos, pipe0, pipe1);
-	if(execve(path, key->cmds[pos], key->env) == -1)
+	if (execve(path, key->cmds[pos], key->env) == -1)
 		errcmd(key, pos);
 	exit(127);
 }
@@ -79,5 +79,7 @@ void	px_waitchild(pid_t *pid, t_key *key)
 	if (WIFEXITED(status))
 		status = WEXITSTATUS(status);
 	razegarbage();
+	if (access(".swap", F_OK) == 0)
+		unlink(".swap");
 	exit(status);
 }

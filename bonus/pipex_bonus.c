@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 23:52:06 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/17 02:54:46 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/19 14:25:54 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,13 @@ void	heredoc(t_key *key)
 	char	*line;
 	char	*out;
 	char	*tmp;
+	int		len;
 
 	out = ft_strdup("");
 	line = ft_strdup("");
-	while (ft_strncmp(key->av[2], line, ft_strlen(line) - 1) != 0)
+	len = ft_strlen(key->av[2]);
+	while (ft_strncmp(key->av[2], line, ft_strlen(line) - 1) != 0
+		|| ft_strncmp(key->av[2], line, len) != 0)
 	{
 		gfree(line);
 		line = get_next_line(0);
@@ -47,8 +50,8 @@ char	***cmdparser(int cmds, bool heredoc, char **argv)
 	a = 2;
 	if (heredoc)
 		a = 3;
-	out = galloc(cmds * sizeof(char **));
-	while (i <=cmds)
+	out = galloc((cmds + 1) * sizeof(char **));
+	while (i <= cmds)
 	{
 		out[i] = px_cmdwrk(argv[a]);
 		++i;
@@ -64,7 +67,8 @@ t_key	*keywrk(int argc, char **argv, char **envp)
 	key = galloc(sizeof(t_key));
 	key->ac = argc;
 	key->av = argv;
-	if (!ft_strncmp(key->av[1], "heredoc", ft_strlen(key->av[1])))
+	if (!ft_strncmp(key->av[1], "heredoc", ft_strlen(key->av[1])) 
+		&& !ft_strncmp(key->av[1], "heredoc", 7))
 		key->heredoc = true;
 	else
 		key->heredoc = false;
@@ -110,8 +114,9 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_key	*key;
 
-	if (argc < 5 || (argc < 6
-			&& !ft_strncmp(argv[1], "heredoc", ft_strlen(argv[1]))))
+	if (argc < 5 || ((argc < 6
+			&& !ft_strncmp(argv[1], "heredoc", ft_strlen(argv[1])))
+			&& (argc < 6 && !ft_strncmp(argv[1], "heredoc", 7))))
 		px_error("not enough arguments");
 	key = keywrk(argc, argv, envp);
 	pipewrk(key);
