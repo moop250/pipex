@@ -6,14 +6,14 @@
 #    By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/23 16:16:12 by hlibine           #+#    #+#              #
-#    Updated: 2024/02/19 11:53:17 by hlibine          ###   ########.fr        #
+#    Updated: 2024/02/19 16:17:05 by hlibine          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 AR = ar rcs
 RM = rm -f
 EXTENDED_FT = srcs/extended_ft/

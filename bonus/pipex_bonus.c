@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 23:52:06 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/19 14:25:54 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/19 16:16:34 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_key	*keywrk(int argc, char **argv, char **envp)
 	key = galloc(sizeof(t_key));
 	key->ac = argc;
 	key->av = argv;
-	if (!ft_strncmp(key->av[1], "heredoc", ft_strlen(key->av[1])) 
+	if (!ft_strncmp(key->av[1], "heredoc", ft_strlen(key->av[1]))
 		&& !ft_strncmp(key->av[1], "heredoc", 7))
 		key->heredoc = true;
 	else
@@ -115,7 +115,7 @@ int	main(int argc, char **argv, char **envp)
 	t_key	*key;
 
 	if (argc < 5 || ((argc < 6
-			&& !ft_strncmp(argv[1], "heredoc", ft_strlen(argv[1])))
+				&& !ft_strncmp(argv[1], "heredoc", ft_strlen(argv[1])))
 			&& (argc < 6 && !ft_strncmp(argv[1], "heredoc", 7))))
 		px_error("not enough arguments");
 	key = keywrk(argc, argv, envp);
@@ -125,8 +125,3 @@ int	main(int argc, char **argv, char **envp)
 	razegarbage();
 	return (1);
 }
-
-/* int	main(void)
-{
-	return (0);
-} */
