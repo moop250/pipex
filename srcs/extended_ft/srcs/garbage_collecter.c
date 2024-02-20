@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 15:30:51 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/09 18:16:55 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/20 11:33:59 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	*galloc(size_t size)
 
 	out = addgarbage(malloc(size));
 	if (!out)
-		px_error("malloc");
+		px_error("pipex Error: malloc");
 	return (out);
 }
 

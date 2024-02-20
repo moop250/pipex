@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 23:52:06 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/19 16:16:34 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/20 11:41:31 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	heredoc(t_key *key)
 	gfree(line);
 	key->in = open(".swap", O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (key->in < 0)
-		px_error("Error: Failed to create swap file");
+		px_error("pipex Error: Failed to create swap file");
 	ft_putstr_fd(out, key->in);
 	gfree(out);
 }
@@ -77,7 +77,7 @@ t_key	*keywrk(int argc, char **argv, char **envp)
 	else
 		heredoc(key);
 	if (key->in < 0)
-		px_error("infile");
+		perror("pipex Error: infile");
 	key->env = envp;
 	px_outfile(key, argc, argv);
 	key->cmds = cmdparser(key->cmdcount, key->heredoc, argv);
@@ -117,7 +117,7 @@ int	main(int argc, char **argv, char **envp)
 	if (argc < 5 || ((argc < 6
 				&& !ft_strncmp(argv[1], "heredoc", ft_strlen(argv[1])))
 			&& (argc < 6 && !ft_strncmp(argv[1], "heredoc", 7))))
-		px_error("not enough arguments");
+		px_error("pipex Error: not enough arguments");
 	key = keywrk(argc, argv, envp);
 	pipewrk(key);
 	if (access(".swap", F_OK) == 0)

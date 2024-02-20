@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:00:04 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/19 15:57:09 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/20 13:05:31 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ void	px_outfile(t_key *key, int argc, char **argv)
 		key->cmdcount = argc - 4;
 	}
 	if (key->out < 0)
-		px_error("outfile");
+		px_error("pipex Error: outfile");
 }
 
 void	errcmd(t_key *key, int pos)
 {
-	ft_putstr_fd("pipex: ", 2);
+	ft_putstr_fd("pipex Error: ", 2);
 	ft_putstr_fd(key->cmds[pos][0], 2);
 	ft_putendl_fd(": command not found", 2);
 	razegarbage();
@@ -52,6 +52,8 @@ void	px_duppage(t_key *key, int pos, int *pipe0, int *pipe1)
 			close(key->in);
 			key->in = open(".swap", O_RDONLY);
 		}
+		if (key->in < 0)
+			exit(127);
 		dup2(key->in, STDIN_FILENO);
 	}
 	else
