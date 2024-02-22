@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 23:52:21 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/19 15:36:13 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/22 13:55:54 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@
 # include <errno.h>
 # include <stdio.h>
 # include <stdbool.h>
-// # include <wait.h> include for linux systems
+
+# ifdef __linux__
+#  include <wait.h>
+# endif
 
 typedef struct s_key
 {
