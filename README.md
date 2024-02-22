@@ -1,5 +1,5 @@
 # pipex
-![In Progress](https://img.shields.io/badge/In_Progress-orange)
+![125/100](https://img.shields.io/badge/125%2F100-brightgreen)
 ## Description
 
 pipex is a project at 42 that involves creating a simple program to mimic the functionality of the shell command `pipe` (`|`). The goal is to execute two commands in two separate processes and redirect the output of the first command as input to the second command.
