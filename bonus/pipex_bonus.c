@@ -6,7 +6,7 @@
 /*   By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 23:52:06 by hlibine           #+#    #+#             */
-/*   Updated: 2024/02/20 14:59:27 by hlibine          ###   ########.fr       */
+/*   Updated: 2024/02/22 14:08:21 by hlibine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,20 @@ void	heredoc(t_key *key)
 	char	*out;
 	char	*tmp;
 	int		len;
-	int		br;
 
 	out = ft_strdup("");
 	line = ft_strdup("");
 	len = ft_strlen(key->av[2]);
-	br = 0;
-	while (br == 0)
+	while (len != -1)
 	{
 		gfree(line);
 		line = get_next_line(0);
 		if (ft_strncmp(key->av[2], line, ft_strlen(line) - 1) == 0
-		|| ft_strncmp(key->av[2], line, len) == 0)
-			br = 1;
-		else
-		{
-			tmp = ft_strjoin(out, line);
-			gfree(out);
-			out = tmp;
-		}
+			|| ft_strncmp(key->av[2], line, len) == 0)
+			break ;
+		tmp = ft_strjoin(out, line);
+		gfree(out);
+		out = tmp;
 	}
 	gfree(line);
 	key->in = open(".swap", O_CREAT | O_RDWR | O_TRUNC, 0644);
