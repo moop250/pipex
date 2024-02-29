@@ -6,7 +6,7 @@
 #    By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/23 16:16:12 by hlibine           #+#    #+#              #
-#    Updated: 2024/02/19 16:17:05 by hlibine          ###   ########.fr        #
+#    Updated: 2024/02/23 16:52:15 by hlibine          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,13 +57,12 @@ bonus: ${BONUS}
 
 clean:
 		@echo "$(ORANGE)Cleaning up$(RESET)"
-		@cd $(EXTENDED_FT) && $(MAKE) -s clean
+		@cd $(EXTENDED_FT) && $(MAKE) -s fclean
 		@echo "$(GREEN)Clean up successful$(RESET)"
 
 fclean: clean
 		@echo "$(ORANGE)Full clean up$(RESET)"
 		@${RM} ${NAME} ${BONUS}
-		@cd $(EXTENDED_FT) && $(MAKE) -s fclean
 		@echo "$(GREEN)Full clean up successful$(RESET)"
 
 re: fclean all
