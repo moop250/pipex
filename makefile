@@ -6,7 +6,7 @@
 #    By: hlibine <hlibine@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/23 16:16:12 by hlibine           #+#    #+#              #
-#    Updated: 2024/02/23 16:52:15 by hlibine          ###   ########.fr        #
+#    Updated: 2024/04/25 16:05:12 by hlibine          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 AR = ar rcs
 RM = rm -f
-EXTENDED_FT = srcs/extended_ft/
+EXTENDED_FT = libs/extended_ft/
 BONUS = pipex_bonus
 
 SRCS_PX = srcs/pipex.c\
@@ -29,7 +29,7 @@ BONUS_SRCS = bonus/pipex_bonus.c\
 		bonus/get_next_line/get_next_line_utils.c\
 		bonus/get_next_line/get_next_line.c\
 
-INCLUDE = -L ./srcs/extended_ft/ -lft
+INCLUDE = -L ./libs/extended_ft/ -lft
 
 GREEN = \033[0;32m
 ORANGE = \033[38;5;208m
